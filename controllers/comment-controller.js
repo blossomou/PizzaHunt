@@ -3,13 +3,11 @@ const { Comment, Pizza } = require('../models');
 const commentController = {
   //add comment ot pizza
   addComment({ params, body }, res) {
-    console.log(body);
     Comment.create(body)
       .then(({ _id }) => {
-        console.log(_id);
         return Pizza.findOneAndUpdate(
           { _id: params.pizzaId },
-          { $push: { comments: id } },
+          { $push: { comments: _id } },
           { new: true }
         );
       })
